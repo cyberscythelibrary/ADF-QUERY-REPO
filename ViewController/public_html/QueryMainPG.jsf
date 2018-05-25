@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:h="http://java.sun.com/jsf/html">
+    <af:document title="QueryMainPG.jsf" id="d1">
+        <af:form id="f1">
+            <af:panelFormLayout id="pfl1" maxColumns="1" rows="3" fieldWidth="100%" labelWidth="100%"
+                                labelAlignment="top">
+                <af:inputText label="Input Query" id="it2" simple="true" rows="10" contentStyle="min-width:100%;"
+                              required="true" placeholder="Input SQL" binding="#{backingBeanScope.QueryMainBean.pg_SQL_INPUT}"/>
+                <h:commandButton value="Execute Query" id="cb1"
+                                 action="#{backingBeanScope.QueryMainBean.doExecuteQuery}"/>
+                <af:inputText label="Output Result" id="it1" simple="true" rows="10" contentStyle="min-width:100%;"
+                              placeholder="Output Result" readOnly="true"
+                              binding="#{backingBeanScope.QueryMainBean.pg_SQL_OUTPUT}"/>
+            </af:panelFormLayout>
+        </af:form>
+    </af:document>
+</f:view>

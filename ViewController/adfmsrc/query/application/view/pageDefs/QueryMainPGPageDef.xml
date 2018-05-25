@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.9.14" id="QueryMainPGPageDef"
+                Package="query.application.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+  </executables>
+  <bindings>
+    <methodAction id="getSQLresult" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getSQLresult"
+                  IsViewObjectMethod="false" DataControl="QueryMainAMDataControl"
+                  InstanceName="bindings.getSQLresult.dataControl.dataProvider"
+                  ReturnName="data.QueryMainAMDataControl.methodResults.getSQLresult_getSQLresult_dataControl_dataProvider_getSQLresult_result">
+      <NamedData NDName="query" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

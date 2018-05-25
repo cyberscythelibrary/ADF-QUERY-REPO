@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="QueryMainAM"
+  Version="12.2.1.9.14"
+  InheritPersonalization="merge"
+  ClearCacheOnRollback="true"
+  ComponentClass="query.application.model.QueryMainAMImpl"
+  ComponentInterface="query.application.model.common.QueryMainAM">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="query.application.model.QueryMainAM_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="getSQLresult"
+      MethodName="getSQLresult">
+      <Return
+        Name="_return_type_"
+        Type="java.sql.ResultSet"/>
+      <Parameter
+        Name="query"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientInterface>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="query.application.model.ModelBundle"/>
+  </ResourceBundle>
+</AppModule>
