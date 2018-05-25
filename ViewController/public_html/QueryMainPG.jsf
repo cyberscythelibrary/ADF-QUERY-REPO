@@ -10,6 +10,7 @@
                               required="true" placeholder="Input SQL" binding="#{backingBeanScope.QueryMainBean.pg_SQL_INPUT}"/>
                 <h:commandButton value="Execute Query" id="cb1"
                                  action="#{backingBeanScope.QueryMainBean.doExecuteQuery}"/>
+                <af:outputText value="No Result" id="ot1"/>
                 <af:inputText label="Output Result" id="it1" simple="true" rows="10" contentStyle="min-width:100%;"
                               placeholder="Output Result" readOnly="true"
                               binding="#{backingBeanScope.QueryMainBean.pg_SQL_OUTPUT}"/>

@@ -35,6 +35,7 @@ public class QueryMainBean {
 
         String sQuery = "";
         sQuery = pg_SQL_INPUT.getValue().toString();
+        int rowCount = 0;
 
         logmessages("doExecuteQuery SQL" + sQuery);
         BindingContext context = BindingContext.getCurrent();
@@ -48,18 +49,12 @@ public class QueryMainBean {
             logmessages("oSQLresult not null");
             logmessages(oSQLresult.toString());
             StringBuffer OutputBuffer = new StringBuffer();
+            StringBuffer rowcount = new StringBuffer();
             ResultSetMetaData rsmd;
             try {
                 rsmd = oSQLresult.getMetaData();
                 logmessages("get meta data oSQLresult");
-                int rowCount = oSQLresult.getRow();
                 int columnCount = rsmd.getColumnCount();
-                logmessages("get Row count oSQLresult-" + rowCount);
-                logmessages("get column count oSQLresult-" + columnCount);
-
-                OutputBuffer.append(System.getProperty("line.separator"));
-                OutputBuffer.append("Row Count :" + rowCount);
-                OutputBuffer.append(System.getProperty("line.separator"));
                 String columnname = "";
                 String temp_string = "";
 
@@ -76,6 +71,7 @@ public class QueryMainBean {
                         OutputBuffer.append(temp_string);
                         OutputBuffer.append(sDelimiter);
                     }
+                    rowCount++;
                     OutputBuffer.append(System.getProperty("line.separator"));
                 }
             } catch (SQLException e) {
@@ -87,6 +83,11 @@ public class QueryMainBean {
                     e.printStackTrace();
                 }
             }
+            
+            rowcount.append("Row Count :" + rowCount);
+            
+            OutputBuffer=rowcount.append(System.getProperty("line.separator")).append(OutputBuffer);
+            pg_SQL_OUTPUT.setRows(rowCount);
             pg_SQL_OUTPUT.setValue(OutputBuffer.toString());
         } else {
             FacesMessage Message = new FacesMessage("Please Check the Query.");
