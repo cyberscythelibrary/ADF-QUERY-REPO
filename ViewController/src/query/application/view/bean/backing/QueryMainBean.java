@@ -89,14 +89,15 @@ public class QueryMainBean {
             OutputBuffer=rowcount.append(System.getProperty("line.separator")).append(OutputBuffer);
             pg_SQL_OUTPUT.setRows(rowCount);
             pg_SQL_OUTPUT.setValue(OutputBuffer.toString());
-        } else {
-            FacesMessage Message = new FacesMessage("Please Check the Query.");
+        } 
+        
+        {
+            FacesMessage Message = new FacesMessage("Execution Completed.");
             Message.setSeverity(FacesMessage.SEVERITY_INFO);
             FacesContext fc = FacesContext.getCurrentInstance();
             fc.addMessage(null, Message);
         }
         logmessages("doExecuteQuery END");
-        // Add event code here...
         return null;
     }
 

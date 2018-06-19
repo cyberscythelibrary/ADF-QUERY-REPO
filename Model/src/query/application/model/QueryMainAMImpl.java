@@ -1,5 +1,6 @@
 package query.application.model;
 
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -25,6 +26,15 @@ public class QueryMainAMImpl extends ApplicationModuleImpl implements QueryMainA
     }
 
     public ResultSet getSQLresult(String query) {
+        
+        String arr[] = query.split(" ", 2);
+
+        String firstWord = arr[0];   //the
+        
+        
+        if ("SELECT".equalsIgnoreCase(firstWord))
+        {
+        
         query = removeUserGenericError(query);
 
         ResultSet rs;
@@ -36,8 +46,35 @@ public class QueryMainAMImpl extends ApplicationModuleImpl implements QueryMainA
         }
         logmessages(rs.toString());
         return rs;
+        }
+        else {
+            callStoredPackageProcedure(query);
+            return null;
+        }
     }
-
+    
+    public void callStoredPackageProcedure(String stmt) {
+        System.out.println("callStoredPackageProcedure"+stmt);
+        CallableStatement st = null;
+        try {
+            // 1. Create a JDBC CallabledStatement
+            st = getDBTransaction().createCallableStatement(stmt, 0);
+            // 2. Register the first bind variable for the return value
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new JboException(e);
+        } finally {
+            if (st != null) {
+                try {
+                    // 7. Close the statement
+                    st.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    
     private String removeUserGenericError(String query) {
         char lastChar = query.charAt(query.length() - 1);
         if (lastChar == ';') {
